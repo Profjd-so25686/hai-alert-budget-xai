@@ -1,0 +1,21 @@
+# HAI data and anything derived from it never enter the repository (CC BY-SA 4.0; kept on encrypted storage)
+data/raw/*
+data/derived/*
+!data/raw/.gitkeep
+!data/derived/.gitkeep
+results/*
+!results/.gitkeep
+# Python
+.venv/
+__pycache__/
+*.pyc
+*.egg-info/
+.pytest_cache/
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# Office lock files
+~$*

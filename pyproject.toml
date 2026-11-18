@@ -1,0 +1,32 @@
+[build-system]
+requires = ["setuptools>=75"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "haistudy"
+version = "0.1.0"
+description = "Explainable unsupervised anomaly detection on HAI 21.03 under a small-utility alert budget (MSc research project)"
+readme = "README.md"
+license = { text = "MIT" }
+authors = [{ name = "Saheed Oyewo" }]
+requires-python = ">=3.12,<3.13"
+dependencies = [
+  "numpy==2.5.4",
+  "pandas==3.1.1",
+  "pyarrow==26.0.1",
+  "scipy==1.18.1",
+  "scikit-learn==1.9.1",
+  "shap==0.54.1",
+  "matplotlib==3.11.2",
+  "pyyaml==6.0.3",
+]
+
+[project.optional-dependencies]
+autoencoder = ["torch==2.15.0"]
+dev = ["pytest==9.2.0"]
+
+[tool.setuptools.packages.find]
+where = ["src"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]

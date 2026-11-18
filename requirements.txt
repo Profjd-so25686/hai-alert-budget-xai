@@ -1,0 +1,13 @@
+# Direct dependencies, pinned. Tested together on Python 3.12.3 (Linux) on 14 November 2026.
+numpy==2.5.4
+pandas==3.1.1
+pyarrow==26.0.1
+scipy==1.18.1
+scikit-learn==1.9.1
+shap==0.54.1
+matplotlib==3.11.2
+pyyaml==6.0.3
+pytest==9.2.0
+# Autoencoder. Resolves from PyPI but was NOT installed or tested when this file was written.
+# Install it, run scripts/check_environment.py, then regenerate requirements-lock.txt.
+torch==2.15.0

@@ -1,0 +1,46 @@
+# Fixed study settings. Every value here must match the pre-registration.
+# Items marked TODO are pre-registration placeholders, filled after the pilot (weeks 7 to 9).
+dataset:
+  name: HAI 21.03
+  licence: CC BY-SA 4.0
+  source: https://github.com/icsdataset/hai
+  sampling_seconds: 1
+partition:
+  training: [train1, train2, train3]        # normal operation only
+  validation: [test1, test2]                # 25 single-primitive attacks
+  held_out: [test3, test4, test5]           # 25 combined attacks; sealed by hash; opened once in week 20
+windows:
+  length_seconds: 60
+  step_seconds: 10
+  features_per_tag: [mean, std, min, max, slope]
+alerts:
+  budget_false_alerts: 5
+  budget_period_hours: 12
+  budget_rule: maximum                      # no rolling 12-hour period within a file may exceed the budget
+  merge_gap_seconds: 60
+  alert_time: end_of_first_flagged_window
+  sensitivity_rule: average
+detectors: [pca, isolation_forest, autoencoder]
+seeds:
+  primary: TODO
+  others: [TODO, TODO, TODO, TODO]
+explanation:
+  isolation_forest: [treeshap, kernelshap]
+  pca: [kernelshap]
+  autoencoder: [kernelshap]
+  explained_output: mean_path_length        # same output for both explainers on the isolation forest
+  tag_group_correlation: 0.8
+  replacement_draws: 20
+  kernelshap_background: TODO
+  kernelshap_nsamples: TODO
+  normal_window_sample: TODO
+  cpu_hour_limit: 24
+statistics:
+  alpha: 0.05
+  h1_sesoi_recall_points: 25
+  h2_sesoi_curve_area: 0.05
+  h3_rho_threshold: 0.80
+  ac1_event_recall: 0.50
+  bootstrap_resamples: 10000
+  bootstrap_seed: TODO
+  ac2_block_hours: 1
