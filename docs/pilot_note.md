@@ -58,3 +58,7 @@ P4. Matched-background SHAP comparison (23 November 2026). With TreeSHAP in inte
 
 P5. Workload (23 November 2026). Normal-window sample fixed at 1,000 per model run. Held-out attack windows estimated at about 638 from attack durations in the HAI documentation (test3 to test5 not opened), giving about 1,638 windows per model run and a projected 15.6 CPU h at the proposed KernelSHAP setting (about 8.7 CPU h at the fallback). Estimation method checked against the validation files: 552 actual attack windows against 540 estimated (2 per cent under).
 
+
+
+P6. KernelSHAP cost for all detectors (23 November 2026). Timed on stand-in PCA (95 per cent variance, 65 components) and autoencoder (395-64-16-64-395) on train1, PyTorch limited to one thread, CPU time counted. Projected totals at 1,638 windows per model run (PCA 1 run, isolation forest and autoencoder 5 each): 17.5 CPU h at the proposed setting (100 background, 2,838 samples) and 10.2 CPU h at the fallback (50, 2,838). Both within the 24 CPU h limit. Rule: if the final configurations exceed 24 CPU h at the proposed setting, the fallback is used for all detectors.
+
