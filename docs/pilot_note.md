@@ -54,3 +54,7 @@ P3. SHAP additivity and cost (23 November 2026). TreeSHAP additivity confirmed o
 
 P4. Matched-background SHAP comparison (23 November 2026). With TreeSHAP in interventional mode and both explainers using the same unweighted background of training windows (KernelSHAP with l1\_reg disabled), agreement rose to median ρ 0.92 to 0.97 (features) and 0.98 to 0.99 (tags), and increased with sample count, confirming the earlier low agreement came from mismatched references. Projected KernelSHAP cost: 8.8 to 29.7 CPU h. Proposed setting: 100 background windows, 2,838 samples (15.7 CPU h); fallback 50 and 2,838 (8.8 CPU h). Decided before any validation or test data was used for explanation.
 
+
+
+P5. Workload (23 November 2026). Normal-window sample fixed at 1,000 per model run. Held-out attack windows estimated at about 638 from attack durations in the HAI documentation (test3 to test5 not opened), giving about 1,638 windows per model run and a projected 15.6 CPU h at the proposed KernelSHAP setting (about 8.7 CPU h at the fallback). Estimation method checked against the validation files: 552 actual attack windows against 540 estimated (2 per cent under).
+
