@@ -48,6 +48,10 @@ Under the current guard (scale 1), an attack on P2\_RTR or the PP01A tags would 
 
 
 
+P2. Scaling of constant tags (23 November 2026). Compared raw and relative scaling on validation data (scaler fitted on train1 to train3). Constant-tag features contribute almost nothing to attack windows under either rule (median share 0.0, max 0.2 per cent); the large-valued tags (P1\_PP01AD, P2\_RTR) do not move in validation. Decision: keep the raw rule (scale 1). P1\_PCV02D moves only in attack windows, supporting P1.
+
+
+
 P3. SHAP additivity and cost (23 November 2026). TreeSHAP additivity confirmed on real train1 windows (gap 8.9e-15). KernelSHAP projected at 0.6 to 4.9 CPU h, within the 24 h limit. Agreement with path-dependent TreeSHAP was low (median ρ about 0.27 features, 0.50 tags) and did not improve with more samples, indicating a difference in reference distribution, not sampling error. Next: rerun with interventional TreeSHAP on the same background.
 
 
@@ -61,4 +65,8 @@ P5. Workload (23 November 2026). Normal-window sample fixed at 1,000 per model r
 
 
 P6. KernelSHAP cost for all detectors (23 November 2026). Timed on stand-in PCA (95 per cent variance, 65 components) and autoencoder (395-64-16-64-395) on train1, PyTorch limited to one thread, CPU time counted. Projected totals at 1,638 windows per model run (PCA 1 run, isolation forest and autoencoder 5 each): 17.5 CPU h at the proposed setting (100 background, 2,838 samples) and 10.2 CPU h at the fallback (50, 2,838). Both within the 24 CPU h limit. Rule: if the final configurations exceed 24 CPU h at the proposed setting, the fallback is used for all detectors.
+
+
+
+P7. Low-variance tags and regime shift (23 November 2026). Features of tags that barely vary in training reach very large standardised values: P1\_PCV02Z up to 16,542 in attack windows only (a genuine attack response), and turbine tags P2\_VT01, P2\_SIT01, P2\_SIT02, P2\_VXT02 up to about 1,650 in normal validation windows, indicating turbine behaviour in test1 and test2 that is absent from training. To be resolved before pre-registration.
 
