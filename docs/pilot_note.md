@@ -50,3 +50,7 @@ Under the current guard (scale 1), an attack on P2\_RTR or the PP01A tags would 
 
 P3. SHAP additivity and cost (23 November 2026). TreeSHAP additivity confirmed on real train1 windows (gap 8.9e-15). KernelSHAP projected at 0.6 to 4.9 CPU h, within the 24 h limit. Agreement with path-dependent TreeSHAP was low (median ρ about 0.27 features, 0.50 tags) and did not improve with more samples, indicating a difference in reference distribution, not sampling error. Next: rerun with interventional TreeSHAP on the same background.
 
+
+
+P4. Matched-background SHAP comparison (23 November 2026). With TreeSHAP in interventional mode and both explainers using the same unweighted background of training windows (KernelSHAP with l1\_reg disabled), agreement rose to median ρ 0.92 to 0.97 (features) and 0.98 to 0.99 (tags), and increased with sample count, confirming the earlier low agreement came from mismatched references. Projected KernelSHAP cost: 8.8 to 29.7 CPU h. Proposed setting: 100 background windows, 2,838 samples (15.7 CPU h); fallback 50 and 2,838 (8.8 CPU h). Decided before any validation or test data was used for explanation.
+
