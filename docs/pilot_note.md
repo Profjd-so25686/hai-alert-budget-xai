@@ -70,3 +70,11 @@ P6. KernelSHAP cost for all detectors (23 November 2026). Timed on stand-in PCA 
 
 P7. Low-variance tags and regime shift (23 November 2026). Features of tags that barely vary in training reach very large standardised values: P1\_PCV02Z up to 16,542 in attack windows only (a genuine attack response), and turbine tags P2\_VT01, P2\_SIT01, P2\_SIT02, P2\_VXT02 up to about 1,650 in normal validation windows, indicating turbine behaviour in test1 and test2 that is absent from training. To be resolved before pre-registration.
 
+
+
+P7 (resolved 24 November 2026). 18 of 15,638 normal validation windows (0.12 per cent) have a standardised feature above 50: 15 within 30 minutes after an attack ends (all test2, mainly P2\_VT01), 3 elsewhere. Decision: no change to scaling. Pre-registered sensitivity analysis: false alerts and AC2 recomputed excluding windows that start within 30 minutes after an attack ends.
+
+
+
+P8. Tag groups (24 November 2026). Tags linked where absolute Pearson correlation exceeds 0.8 on normal training rows (train1 to train3); groups are connected sets of linked tags. Result: 47 groups from 79 tags, 11 with more than one tag (largest 9), 22 constant tags as single groups. Full list in results/pilot\_tag\_groups\_2026-11-24.json, to be attached to the pre-registration.
+
