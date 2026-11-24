@@ -1,46 +1,73 @@
-# Fixed study settings. Every value here must match the pre-registration.
-# Items marked TODO are pre-registration placeholders, filled after the pilot (weeks 7 to 9).
+# Fixed study settings. Every value here must match the pre-registration (pack v6, 24 November 2026).
+# Pilot decisions P1 to P10 are recorded in docs/pilot_note.md.
 dataset:
   name: HAI 21.03
   licence: CC BY-SA 4.0
   source: https://github.com/icsdataset/hai
+  source_commit: 2a814cebc9a66b06c9e5cd545e2d72e65d383737
   sampling_seconds: 1
+  manifest: docs/hai_manifest.json            # SHA-256 of every file, recorded 18 November 2026
 partition:
-  training: [train1, train2, train3]        # normal operation only
-  validation: [test1, test2]                # 25 single-primitive attacks
-  held_out: [test3, test4, test5]           # 25 combined attacks; sealed by hash; opened once in week 20
+  training: [train1, train2, train3]          # normal operation only
+  validation: [test1, test2]                  # 25 single-primitive attacks; tuning and calibration
+  held_out: [test3, test4, test5]             # 25 combined attacks; sealed; opened once in week 20
 windows:
   length_seconds: 60
   step_seconds: 10
   features_per_tag: [mean, std, min, max, slope]
+scaling:
+  method: standard                            # training mean and standard deviation, all three training files
+  zero_spread_scale: 1                        # P1, P2: the 22 constant tags are kept and scaled by 1
 alerts:
   budget_false_alerts: 5
   budget_period_hours: 12
-  budget_rule: maximum                      # no rolling 12-hour period within a file may exceed the budget
+  budget_rule: maximum                        # no rolling 12-hour period within a file may exceed the budget
   merge_gap_seconds: 60
   alert_time: end_of_first_flagged_window
   sensitivity_rule: average
-detectors: [pca, isolation_forest, autoencoder]
-seeds:
-  primary: TODO
-  others: [TODO, TODO, TODO, TODO]
+  sensitivity_recovery_exclusion_minutes: 30  # P7: false alerts also reported excluding 30 minutes after each attack
+detectors:
+  pca:
+    variance_retained: [0.90, 0.95, 0.99]
+  isolation_forest:
+    n_estimators: [100, 200]                  # P10: 300 removed because KernelSHAP cost scales with forest size
+    max_samples: [256, 512]
+  autoencoder:
+    bottleneck: [8, 16, 32]
+    hidden_layers: [1, 2]
+    hidden_width: 64
+    learning_rate: 0.001
+    early_stopping_patience: 10
+    max_epochs: 200
+  selection: highest validation event recall at the alert budget; ties go to the simpler model
+seeds:                                        # P9
+  models: [101, 202, 303, 404, 505]
+  primary: 101
+  background_sample: 7001
+  normal_window_sample: 7002
+  bootstrap: 7003
 explanation:
   isolation_forest: [treeshap, kernelshap]
   pca: [kernelshap]
   autoencoder: [kernelshap]
-  explained_output: mean_path_length        # same output for both explainers on the isolation forest
-  tag_group_correlation: 0.8
-  replacement_draws: 20
-  kernelshap_background: TODO
-  kernelshap_nsamples: TODO
-  normal_window_sample: TODO
+  explained_output: mean_path_length          # same output for both explainers on the isolation forest
+  treeshap_mode: interventional               # P4: same value function as KernelSHAP
+  background_windows: 100                     # random normal training windows, equally weighted, shared by both explainers
+  kernelshap_nsamples: 2838                   # 2 x 395 + 2048
+  kernelshap_l1_reg: false
+  normal_window_sample: 1000                  # P5
+  fallback: {background_windows: 50, kernelshap_nsamples: 2838}   # used if tuned detectors exceed the CPU limit
   cpu_hour_limit: 24
+  tag_groups: docs/tag_groups.json            # P8: |r| > 0.8 on training rows, connected sets, 47 groups
+  fidelity_deletions: 10
+  fidelity_replacement_draws: 20
+  fidelity_random_order_draws: 20
 statistics:
   alpha: 0.05
   h1_sesoi_recall_points: 25
   h2_sesoi_curve_area: 0.05
-  h3_rho_threshold: 0.80
+  h3_rho_threshold: 0.80                      # unchanged from the approved proposal
+  h3_primary_measure: spearman_all_395_features
   ac1_event_recall: 0.50
   bootstrap_resamples: 10000
-  bootstrap_seed: TODO
   ac2_block_hours: 1

@@ -78,3 +78,13 @@ P7 (resolved 24 November 2026). 18 of 15,638 normal validation windows (0.12 per
 
 P8. Tag groups (24 November 2026). Tags linked where absolute Pearson correlation exceeds 0.8 on normal training rows (train1 to train3); groups are connected sets of linked tags. Result: 47 groups from 79 tags, 11 with more than one tag (largest 9), 22 constant tags as single groups. Full list in results/pilot\_tag\_groups\_2026-11-24.json, to be attached to the pre-registration.
 
+
+
+P9. Seeds (24 November 2026). Model seeds 101, 202, 303, 404, 505, with 101 primary. Background sample 7001, normal-window sample 7002, bootstrap 7003.
+
+
+
+P10. Tuning grids (24 November 2026). PCA variance retained: 90, 95, 99 per cent. Isolation forest trees: 100, 200 (300 removed, because KernelSHAP cost scales with forest size and 300 trees would exceed the 24 CPU-hour limit); sample size: 256, 512. Autoencoder bottleneck: 8, 16, 32; hidden layers: 1, 2; hidden width 64; learning rate 0.001; early stopping on normal validation windows, patience 10, maximum 200 epochs. Selection: highest validation event recall at the alert budget; ties go to the simpler model.
+
+
+
