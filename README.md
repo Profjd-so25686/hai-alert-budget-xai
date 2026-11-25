@@ -97,4 +97,4 @@ Code: MIT (see `LICENSE`). Any derived data that is shared carries CC BY-SA 4.0,
 
 ## Use of generative AI
 
-The initial scaffold in this repository (environment files, settings file, custody tool and its tests) was drafted with Claude, an AI assistant, and reviewed by the author. Update this statement as the project develops so that it stays accurate.
+The initial scaffold in this repository (environment files, settings file, custody tool and its tests) was drafted with Claude, an AI assistant, and reviewed by the author.
