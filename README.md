@@ -11,7 +11,7 @@ The analysis plan is pre-registered on the Open Science Framework before the hel
 
 ## Status
 
-Pre-registered on OSF: \[link to be added]. The analysis plan is fixed at tag v1.0-preregistered (commit 813df5f). The repository holds the environment, the windowing and scaling code with tests, the chain-of-custody tool, and the pilot scripts and pilot note (docs/pilot\_note.md) that informed the registered settings. Detector code is added after registration, on validation data only; the held-out files remain sealed until the evaluation stage.
+Pre-registered on OSF: https://doi.org/10.17605/OSF.IO/85GBC (lodged 25 November 2026). The analysis plan is fixed at tag v1.0-preregistered (commit 813df5f). The repository holds the environment, the windowing and scaling code with tests, the chain-of-custody tool, and the pilot scripts and pilot note (docs/pilot\_note.md) that informed the registered settings. Detector code is added after registration, on validation data only; the held-out files remain sealed until the evaluation stage.
 
 ## Layout
 
